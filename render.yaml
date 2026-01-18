@@ -24,8 +24,9 @@ services:
       mountPath: /opt/render/project/src/backend/storage
       sizeGB: 1
 
-  - type: static
+  - type: web
     name: ec-frontend
+    runtime: static
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: frontend/dist
     envVars:
