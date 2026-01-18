@@ -42,4 +42,5 @@ return Application::configure(basePath: dirname(__DIR__))
                     ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
             }
         });
-    })->create();
+    })
+    ->create();
