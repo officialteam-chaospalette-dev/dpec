@@ -30,11 +30,14 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 try {
     $response = $app->handleRequest(Request::capture());
 
-    // CORS: すべてのレスポンスにCORSヘッダーを追加
-    $response->headers->set('Access-Control-Allow-Origin', '*');
-    $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-    $response->headers->set('Access-Control-Max-Age', '86400');
+    // CORS: すべてのレスポンスにCORSヘッダーを追加（send()の前に設定）
+    // 注意: CorsMiddlewareで既に追加されているが、念のためここでも追加
+    if (!$response->headers->has('Access-Control-Allow-Origin')) {
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+        $response->headers->set('Access-Control-Max-Age', '86400');
+    }
 
     $response->send();
     
@@ -45,11 +48,13 @@ try {
     exit;
 } catch (\Throwable $e) {
     // エラーが発生した場合でもCORSヘッダーを追加
-    http_response_code(500);
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-    header('Content-Type: application/json');
+    if (!headers_sent()) {
+        http_response_code(500);
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        header('Content-Type: application/json');
+    }
     
     echo json_encode([
         'error' => 'Internal Server Error',
