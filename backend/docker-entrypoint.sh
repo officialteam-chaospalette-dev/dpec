@@ -30,4 +30,5 @@ echo "Available routes:"
 php artisan route:list | head -20 || true
 
 echo "Starting Laravel server..."
+echo "PORT environment variable: ${PORT:-8000}"
 exec "$@"
