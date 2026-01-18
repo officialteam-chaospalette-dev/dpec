@@ -2,8 +2,7 @@ services:
   - type: web
     name: ec-backend
     runtime: docker
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    dockerfilePath: backend/Dockerfile
     plan: free
     envVars:
       - key: APP_ENV
