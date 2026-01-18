@@ -1,0 +1,347 @@
+/* UIビルダーのスタイル */
+
+.ui-builder-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.ui-builder-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ui-builder-header {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  border: 2px solid rgba(52, 73, 94, 0.2);
+}
+
+.ui-builder-header h1 {
+  color: #2c3e50 !important;
+}
+
+.ui-builder-header p {
+  color: #34495e !important;
+}
+
+.ui-builder-main {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 20px;
+  height: calc(100vh - 200px);
+  max-height: calc(100vh - 200px);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* パーツライブラリ */
+.parts-library {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 2px solid rgba(52, 73, 94, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 250px);
+}
+
+.parts-library h2,
+.parts-library h3 {
+  color: #2c3e50 !important;
+}
+
+.parts-category {
+  margin-bottom: 30px;
+}
+
+.parts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.part-item {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  padding: 15px;
+  cursor: grab;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.part-item {
+  position: relative;
+}
+
+.part-item:hover {
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: #667eea;
+  transform: translateY(-2px) scale(1.05);
+}
+
+.part-item:hover .part-preview > * {
+  transform: scale(1.1);
+}
+
+.part-item:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+
+.part-preview {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+  overflow: visible;
+}
+
+.part-preview > * {
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.part-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+/* キャンバスエリア */
+.canvas-area {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 40px;
+  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  min-width: 0; /* グリッドアイテムが親からはみ出さないように */
+  overflow: hidden;
+}
+
+.canvas {
+  flex: 1;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 0; /* Flexboxで適切に縮小されるように */
+  width: 100%;
+  max-width: 100%; /* 親要素の幅を超えないように */
+  box-sizing: border-box;
+}
+
+.canvas-content {
+  position: relative;
+  min-height: 2000px;
+  min-width: 3000px; /* 横スクロールバーを常に表示するための最小幅 */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.canvas-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2000px;
+  min-width: 3000px; /* 横スクロールバーを常に表示するための最小幅 */
+  width: 100%;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.canvas-item {
+  position: absolute;
+  cursor: move;
+  z-index: 10;
+}
+
+.canvas-item.dragging {
+  opacity: 0.5;
+  z-index: 100;
+}
+
+.canvas-item.selected .canvas-item-content {
+  border-color: #667eea;
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
+}
+
+.canvas-item-content {
+  position: relative;
+  background: white;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 0;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.canvas-item-content > div {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.canvas-item-content > div > button,
+.canvas-item-content > div > input,
+.canvas-item-content > div > textarea,
+.canvas-item-content > div > div {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ボタンなどの場合は中央配置を維持 */
+.canvas-item-content > div > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* リサイズハンドル */
+.resize-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #667eea;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: nwse-resize;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.resize-handle-se {
+  bottom: -6px;
+  right: -6px;
+  cursor: nwse-resize;
+}
+
+.resize-handle-sw {
+  bottom: -6px;
+  left: -6px;
+  cursor: nesw-resize;
+}
+
+.resize-handle-ne {
+  top: -6px;
+  right: -6px;
+  cursor: nesw-resize;
+}
+
+.resize-handle-nw {
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+}
+
+.resize-handle:hover {
+  background: #5568d3;
+  transform: scale(1.2);
+}
+
+.canvas-item:hover .canvas-item-content {
+  border-color: #667eea;
+}
+
+.canvas-item-delete {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e74c3c;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-item-delete:hover {
+  background: #c0392b;
+  transform: scale(1.1);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 1024px) {
+  .ui-builder-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .parts-library {
+    max-height: 300px;
+  }
+}
+
+/* スクロールバーのスタイル */
+.parts-library::-webkit-scrollbar,
+.canvas::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.parts-library::-webkit-scrollbar-track,
+.canvas::-webkit-scrollbar-track {
+  background: rgba(52, 73, 94, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(52, 73, 94, 0.1);
+}
+
+.parts-library::-webkit-scrollbar-thumb,
+.canvas::-webkit-scrollbar-thumb {
+  background: rgba(52, 73, 94, 0.4);
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.parts-library::-webkit-scrollbar-thumb:hover,
+.canvas::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 73, 94, 0.6);
+}
+
+.parts-library::-webkit-scrollbar-corner,
+.canvas::-webkit-scrollbar-corner {
+  background: rgba(255, 255, 255, 0.95);
+}

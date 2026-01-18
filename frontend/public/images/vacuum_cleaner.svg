@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="vacuumGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- 掃除機本体（縦長の筒型） -->
+  <rect x="150" y="60" width="100" height="180" rx="20" fill="url(#vacuumGrad)" stroke="#2c3e50" stroke-width="3"/>
+  
+  <!-- ハンドル -->
+  <rect x="165" y="50" width="70" height="25" rx="12" fill="#34495e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="175" y="45" width="50" height="15" rx="7" fill="#2c3e50"/>
+  
+  <!-- コードホルダー -->
+  <circle cx="200" cy="80" r="8" fill="#e74c3c"/>
+  
+  <!-- 吸引口 -->
+  <ellipse cx="200" cy="220" rx="45" ry="15" fill="#2c3e50" opacity="0.7"/>
+  <rect x="155" y="215" width="90" height="10" rx="5" fill="#34495e"/>
+  
+  <!-- フィルター部分 -->
+  <rect x="160" y="100" width="80" height="80" rx="10" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" opacity="0.8"/>
+  <line x1="170" y1="110" x2="230" y2="110" stroke="#95a5a6" stroke-width="1"/>
+  <line x1="170" y1="130" x2="230" y2="130" stroke="#95a5a6" stroke-width="1"/>
+  <line x1="170" y1="150" x2="230" y2="150" stroke="#95a5a6" stroke-width="1"/>
+  <line x1="170" y1="170" x2="230" y2="170" stroke="#95a5a6" stroke-width="1"/>
+  
+  <!-- 電源ボタン -->
+  <circle cx="240" cy="140" r="12" fill="#27ae60" stroke="#2c3e50" stroke-width="2"/>
+  <circle cx="240" cy="140" r="6" fill="#ffffff"/>
+  
+  <!-- ホース接続部 -->
+  <ellipse cx="200" cy="70" rx="20" ry="8" fill="#34495e" opacity="0.6"/>
+  
+  <!-- 反射光 -->
+  <ellipse cx="170" cy="100" rx="15" ry="60" fill="#ffffff" opacity="0.3"/>
+</svg>
+
+

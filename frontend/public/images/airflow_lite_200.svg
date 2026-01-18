@@ -1,0 +1,25 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f0f4ff"/>
+      <stop offset="1" stop-color="#e9f7f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g1)"/>
+  <rect x="190" y="60" width="220" height="280" rx="24" fill="#ffffff" stroke="#cfd8ea"/>
+  <rect x="210" y="85" width="180" height="150" rx="10" fill="#eef3ff" stroke="#d3dcf3"/>
+  <g fill="#9bb3ff">
+    <circle cx="240" cy="160" r="6"/>
+    <circle cx="270" cy="160" r="6"/>
+    <circle cx="300" cy="160" r="6"/>
+    <circle cx="330" cy="160" r="6"/>
+    <circle cx="360" cy="160" r="6"/>
+  </g>
+  <rect x="210" y="255" width="180" height="6" rx="3" fill="#e0e6f7"/>
+  <rect x="210" y="270" width="140" height="6" rx="3" fill="#e0e6f7"/>
+  <text x="300" y="360" text-anchor="middle" font-family="Segoe UI, Roboto, Arial" font-size="22" fill="#334">
+    AirFlow Lite 200（空気清浄機）
+  </text>
+</svg>
+
+

@@ -1,0 +1,13 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="#f5fbff"/>
+  <ellipse cx="300" cy="310" rx="140" ry="25" fill="#e7f1f9"/>
+  <path d="M220 240 q80 -120 160 0 v55 h-160z" fill="#a5c8e8" stroke="#7fb1dc"/>
+  <rect x="245" y="295" width="110" height="10" rx="3" fill="#7fb1dc"/>
+  <rect x="255" y="305" width="8" height="25" rx="2" fill="#7fb1dc"/>
+  <rect x="337" y="305" width="8" height="25" rx="2" fill="#7fb1dc"/>
+  <text x="300" y="360" text-anchor="middle" font-family="Segoe UI, Roboto, Arial" font-size="22" fill="#3d6a8c">
+    リラックスチェア・ソフト
+  </text>
+</svg>
+
+

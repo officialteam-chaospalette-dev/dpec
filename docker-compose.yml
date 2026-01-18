@@ -1,0 +1,40 @@
+services:
+  backend:
+    build: ./backend
+    container_name: ec_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www/html
+    environment:
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/html/database/database.sqlite
+      - CACHE_DRIVER=file
+      - SESSION_DRIVER=file
+    # command を指定せず Dockerfile の CMD を使用
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  frontend:
+    build: ./frontend
+    container_name: ec_frontend
+    ports:
+      - "8080:5173"
+    volumes:
+      - ./frontend:/usr/src/app
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+    stdin_open: true
+    tty: true
+    command: >
+      sh -c "npm ci && npm run build && npx --yes serve -s dist -l 5173"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M

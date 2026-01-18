@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="microwaveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e17055;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d63031;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- 電子レンジ本体（横長の箱型） -->
+  <rect x="80" y="80" width="240" height="160" rx="5" fill="url(#microwaveGrad)" stroke="#2d3436" stroke-width="4"/>
+  
+  <!-- 前面ガラス窓 -->
+  <rect x="100" y="100" width="200" height="120" rx="3" fill="#2d3436" opacity="0.8" stroke="#000000" stroke-width="2"/>
+  <rect x="105" y="105" width="190" height="110" rx="2" fill="#636e72" opacity="0.6"/>
+  
+  <!-- 内部のターンテーブル -->
+  <circle cx="200" cy="160" r="50" fill="#dfe6e9" opacity="0.4"/>
+  <circle cx="200" cy="160" r="45" fill="none" stroke="#b2bec3" stroke-width="2" stroke-dasharray="5,5"/>
+  <circle cx="200" cy="160" r="5" fill="#2d3436"/>
+  
+  <!-- ドアハンドル -->
+  <rect x="290" y="155" width="20" height="30" rx="3" fill="#2d3436"/>
+  <rect x="292" y="160" width="16" height="20" rx="2" fill="#636e72"/>
+  
+  <!-- コントロールパネル -->
+  <rect x="100" y="60" width="200" height="25" rx="3" fill="#2d3436" stroke="#000000" stroke-width="2"/>
+  
+  <!-- ディスプレイ -->
+  <rect x="110" y="65" width="60" height="15" rx="2" fill="#00b894" opacity="0.8"/>
+  <text x="140" y="76" font-family="monospace" font-size="10" fill="#000000" text-anchor="middle">00:30</text>
+  
+  <!-- ボタン -->
+  <circle cx="190" cy="72" r="6" fill="#636e72" stroke="#000000" stroke-width="1"/>
+  <circle cx="210" cy="72" r="6" fill="#636e72" stroke="#000000" stroke-width="1"/>
+  <circle cx="230" cy="72" r="6" fill="#636e72" stroke="#000000" stroke-width="1"/>
+  
+  <!-- ドアの反射 -->
+  <line x1="105" y1="105" x2="105" y2="215" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  
+  <!-- ベース -->
+  <rect x="75" y="235" width="250" height="15" rx="7" fill="#636e72" opacity="0.6"/>
+</svg>
+
+
