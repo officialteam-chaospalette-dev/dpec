@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y \
     zip unzip git sqlite3 libsqlite3-dev \
@@ -18,4 +18,4 @@ RUN composer install || true
 
 EXPOSE 8000
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD sh -c "php artisan serve --host=0.0.0.0 --port=\${PORT:-8000}"
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"]
