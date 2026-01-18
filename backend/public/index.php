@@ -27,12 +27,33 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
-$response = $app->handleRequest(Request::capture());
+try {
+    $response = $app->handleRequest(Request::capture());
 
-// CORS: すべてのレスポンスにCORSヘッダーを追加
-$response->headers->set('Access-Control-Allow-Origin', '*');
-$response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-$response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-$response->headers->set('Access-Control-Max-Age', '86400');
+    // CORS: すべてのレスポンスにCORSヘッダーを追加
+    $response->headers->set('Access-Control-Allow-Origin', '*');
+    $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    $response->headers->set('Access-Control-Max-Age', '86400');
 
-$response->send();
+    $response->send();
+    
+    // 終了処理を実行
+    $app->terminate();
+    
+    // 明示的に終了（これ以降の出力を防ぐ）
+    exit;
+} catch (\Throwable $e) {
+    // エラーが発生した場合でもCORSヘッダーを追加
+    http_response_code(500);
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+    header('Content-Type: application/json');
+    
+    echo json_encode([
+        'error' => 'Internal Server Error',
+        'message' => $e->getMessage()
+    ]);
+    exit;
+}
