@@ -1,10 +1,10 @@
 services:
   - type: web
     name: ec-backend
-    runtime: php
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     plan: free
-    buildCommand: cd backend && composer install --no-dev --optimize-autoloader && php artisan migrate --force && php artisan config:cache && php artisan route:cache
-    startCommand: cd backend && php artisan serve --host=0.0.0.0 --port=$PORT
     envVars:
       - key: APP_ENV
         value: production
@@ -15,14 +15,10 @@ services:
       - key: DB_CONNECTION
         value: sqlite
       - key: DB_DATABASE
-        value: /opt/render/project/src/backend/database/database.sqlite
+        value: /var/www/html/database/database.sqlite
       - key: LOG_CHANNEL
         value: stack
     healthCheckPath: /api/logs/analytics
-    disk:
-      name: backend-storage
-      mountPath: /opt/render/project/src/backend/storage
-      sizeGB: 1
 
   - type: web
     name: ec-frontend
