@@ -29,6 +29,21 @@ php artisan storage:link || true
 echo "Available routes:"
 php artisan route:list | head -20 || true
 
+# Laravelが正しく起動するか確認
+echo "Checking Laravel installation..."
+php artisan --version || echo "WARNING: artisan command may not be working"
+
+# public/index.phpが存在するか確認
+if [ -f "/var/www/html/public/index.php" ]; then
+    echo "✓ public/index.php exists"
+else
+    echo "✗ ERROR: public/index.php NOT FOUND!"
+fi
+
 echo "Starting Laravel server..."
 echo "PORT environment variable: ${PORT:-8000}"
+echo "Current directory: $(pwd)"
+echo "Listing public directory:"
+ls -la /var/www/html/public/ || true
+
 exec "$@"
