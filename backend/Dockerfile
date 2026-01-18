@@ -18,4 +18,4 @@ RUN composer install || true
 
 EXPOSE 8000
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["sh", "-c", "PORT=${PORT:-8000} && echo 'Starting php artisan serve on port $PORT' && php artisan serve --host=0.0.0.0 --port=$PORT --verbose"]
+CMD ["sh", "-c", "export PORT=${PORT:-8000} && echo 'Starting php artisan serve on port $PORT' && cd /var/www/html && php artisan serve --host=0.0.0.0 --port=$PORT"]

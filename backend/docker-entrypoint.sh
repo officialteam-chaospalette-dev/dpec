@@ -46,4 +46,8 @@ echo "Current directory: $(pwd)"
 echo "Listing public directory:"
 ls -la /var/www/html/public/ || true
 
+echo "Checking if artisan command works:"
+php /var/www/html/artisan --version || echo "ERROR: artisan command failed"
+
+echo "Executing: $@"
 exec "$@"
