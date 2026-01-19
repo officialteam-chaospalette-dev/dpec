@@ -43,14 +43,15 @@ try {
     $response->send();
     
     // FastCGI環境では、finish_requestを使用してクライアントに応答を送信
-    // この後は何も実行されないように、すぐに終了
     if (function_exists('fastcgi_finish_request')) {
         fastcgi_finish_request();
     }
     
     // 即座に終了（これ以降のコードは実行されない）
+    // register_shutdown_functionでエラーハンドラーが実行されないようにする
     exit(0);
 } catch (\Throwable $e) {
+    // エラーが発生した場合のみエラーハンドラーが実行される
     // エラーが発生した場合でもCORSヘッダーを返す
     if (!headers_sent()) {
         http_response_code(500);
