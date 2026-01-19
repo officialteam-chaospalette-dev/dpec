@@ -32,10 +32,20 @@ $request = Request::capture();
 try {
     $response = $app->handleRequest($request);
     
+    // レスポンスがnullでないことを確認
+    if ($response === null) {
+        throw new \RuntimeException('Response is null');
+    }
+    
     // CORSヘッダーはCorsMiddlewareで既に追加されているため、ここでは追加しない
     
     // レスポンスを送信
     $response->send();
+    
+    // 出力バッファをフラッシュ
+    if (ob_get_level() > 0) {
+        ob_end_flush();
+    }
     
     // FastCGI環境では、finish_requestを使用してクライアントに応答を送信
     if (function_exists('fastcgi_finish_request')) {
@@ -58,5 +68,10 @@ try {
         'error' => 'Internal Server Error',
         'message' => $e->getMessage()
     ]);
+    
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    }
+    
     exit(1);
 }
