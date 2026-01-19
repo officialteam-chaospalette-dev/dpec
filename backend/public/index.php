@@ -42,17 +42,13 @@ try {
     // レスポンスを送信
     $response->send();
     
-    // 出力バッファをフラッシュ
-    if (ob_get_level() > 0) {
-        ob_end_flush();
-    }
-    
     // FastCGI環境では、finish_requestを使用してクライアントに応答を送信
+    // この後は何も実行されないように、すぐに終了
     if (function_exists('fastcgi_finish_request')) {
         fastcgi_finish_request();
     }
     
-    // 明示的に終了
+    // 即座に終了（これ以降のコードは実行されない）
     exit(0);
 } catch (\Throwable $e) {
     // エラーが発生した場合でもCORSヘッダーを返す
