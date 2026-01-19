@@ -27,10 +27,16 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
 
-$response = $kernel->handle(
-    $request = Request::capture()
-);
+$request = Request::capture();
+$response = $kernel->handle($request);
 
 $response->send();
 
-$kernel->terminate($request, $response);
+// terminate()はレスポンス送信後に実行されるが、エラーが発生しないようにする
+try {
+    $kernel->terminate($request, $response);
+} catch (\Throwable $e) {
+    // terminate()でのエラーは無視（レスポンスは既に送信済み）
+}
+
+exit(0);
