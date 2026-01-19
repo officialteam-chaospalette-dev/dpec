@@ -27,10 +27,12 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
-$response = $app->handleRequest(Request::capture());
+$request = Request::capture();
+$response = $app->handleRequest($request);
 
 // CORSヘッダーはCorsMiddlewareで既に追加されているため、ここでは追加しない
 
 $response->send();
 
-// terminate()は自動的に呼ばれるため、明示的に呼ぶ必要はない
+// レスポンス送信後に明示的に終了
+exit;
