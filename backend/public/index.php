@@ -28,11 +28,35 @@ require __DIR__.'/../vendor/autoload.php';
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $request = Request::capture();
-$response = $app->handleRequest($request);
 
-// CORSヘッダーはCorsMiddlewareで既に追加されているため、ここでは追加しない
-
-$response->send();
-
-// レスポンス送信後に明示的に終了
-exit;
+try {
+    $response = $app->handleRequest($request);
+    
+    // CORSヘッダーはCorsMiddlewareで既に追加されているため、ここでは追加しない
+    
+    // レスポンスを送信
+    $response->send();
+    
+    // FastCGI環境では、finish_requestを使用してクライアントに応答を送信
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    }
+    
+    // 明示的に終了
+    exit(0);
+} catch (\Throwable $e) {
+    // エラーが発生した場合でもCORSヘッダーを返す
+    if (!headers_sent()) {
+        http_response_code(500);
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        header('Content-Type: application/json');
+    }
+    
+    echo json_encode([
+        'error' => 'Internal Server Error',
+        'message' => $e->getMessage()
+    ]);
+    exit(1);
+}
