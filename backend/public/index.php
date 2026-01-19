@@ -33,5 +33,4 @@ $response = $app->handleRequest(Request::capture());
 
 $response->send();
 
-// 終了処理を実行
-$app->terminate();
+// terminate()は自動的に呼ばれるため、明示的に呼ぶ必要はない
