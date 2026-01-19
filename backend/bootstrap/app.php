@@ -29,18 +29,5 @@ return Application::configure(basePath: dirname(__DIR__))
                     ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
             }
         });
-        
-        // すべての例外でCORSヘッダーを返す
-        $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
-            if ($request->expectsJson() || $request->is('api/*')) {
-                return response()->json([
-                    'error' => 'Server Error',
-                    'message' => $e->getMessage()
-                ], 500)
-                    ->header('Access-Control-Allow-Origin', '*')
-                    ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-                    ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-            }
-        });
     })
     ->create();
